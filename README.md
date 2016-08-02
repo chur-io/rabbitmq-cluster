@@ -1,8 +1,10 @@
 # rabbitmq-cluster
 A dynamically scalable rabbitmq cluster setup for docker using docker-compose and docker network
 
-## Pre-requisites
-- Minimum Docker version 1.11
+## Prerequisites
+- Minimum Docker version 1.12
+- Recommended [Docker for Windows](https://docs.docker.com/docker-for-windows/) or [Docker for Mac](https://docs.docker.com/docker-for-mac/) for testing on workstation
+- Recommended [Docker Swarm](https://docs.docker.com/swarm/get-swarm/) for hosting on Linux servers.
 
 ## Usage
 ```sh
