@@ -1,0 +1,45 @@
+version: '2'
+services:
+  rabbitmq-static1:
+    image: rabbitmq-scalable
+    hostname: rabbitmq-static1
+    expose:
+      - "5672"
+    ports:
+      - "15672:15672"
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=K3RNELPAN1CKSD
+      # uncomment to add constraint to a Docker host
+      # - "constraint:node==node0"
+    networks:
+      - back-tier
+  
+  # uncomment to deploy a static RabbitMQ node to a separate Docker host
+  # rabbitmq-static2:
+  #   image: local/rabbitmq-scalable
+  #   hostname: rabbitmq-static2
+  #   expose:
+  #       - "5672"
+  #   ports:
+  #     - "15672:15672"
+  #   environment:
+  #     - RABBITMQ_ERLANG_COOKIE=K3RNELPAN1CKSD
+  #     - CLUSTER_WITH=rabbit-static1
+  #     - "constraint:node==node1"
+  #   networks:
+  #     - back-tier
+
+  rabbitmq:
+    image: rabbitmq-scalable
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=K3RNELPAN1CKSD
+      - CLUSTER_WITH=rabbitmq-static1
+    expose:
+        - "5672"
+    networks:
+      - back-tier
+
+networks:
+  back-tier:
+    external: true
+
